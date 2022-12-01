@@ -1,0 +1,54 @@
+﻿@page
+@model SacramentMeetingPlanner.Pages.SacramentMeetings.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SacramentMeeting</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.Date" class="control-label"></label>
+                <input asp-for="SacramentMeeting.Date" class="form-control" />
+                <span asp-validation-for="SacramentMeeting.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.Presiding" class="control-label"></label>
+                <input asp-for="SacramentMeeting.Presiding" class="form-control" />
+                <span asp-validation-for="SacramentMeeting.Presiding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.Conducting" class="control-label"></label>
+                <input asp-for="SacramentMeeting.Conducting" class="form-control" />
+                <span asp-validation-for="SacramentMeeting.Conducting" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.Invocation" class="control-label"></label>
+                <input asp-for="SacramentMeeting.Invocation" class="form-control" />
+                <span asp-validation-for="SacramentMeeting.Invocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.Benediction" class="control-label"></label>
+                <input asp-for="SacramentMeeting.Benediction" class="form-control" />
+                <span asp-validation-for="SacramentMeeting.Benediction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
