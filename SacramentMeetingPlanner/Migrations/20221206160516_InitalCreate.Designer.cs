@@ -12,8 +12,8 @@ using SacramentMeetingPlanner.Data;
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(SacramentMeetingPlannerContext))]
-    [Migration("20221201180355_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221206160516_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,72 +53,89 @@ namespace SacramentMeetingPlanner.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SacramentMeetingId"), 1L, 1);
 
                     b.Property<string>("Benediction")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClosingHymnHymnId")
+                    b.Property<int?>("ClosingHymnId")
                         .HasColumnType("int");
 
                     b.Property<string>("Conducting")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntermediateHymnHymnId")
+                    b.Property<int?>("IntermediateHymnId")
                         .HasColumnType("int");
 
                     b.Property<string>("Invocation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OpeningHymnHymnId")
+                    b.Property<int>("OpeningHymnId")
                         .HasColumnType("int");
 
                     b.Property<string>("Presiding")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SacramentalHymnHymnId")
+                    b.Property<int>("SacramentalHymnId")
                         .HasColumnType("int");
 
                     b.HasKey("SacramentMeetingId");
 
-                    b.HasIndex("ClosingHymnHymnId");
+                    b.HasIndex("ClosingHymnId");
 
-                    b.HasIndex("IntermediateHymnHymnId");
+                    b.HasIndex("IntermediateHymnId");
 
-                    b.HasIndex("OpeningHymnHymnId");
+                    b.HasIndex("OpeningHymnId");
 
-                    b.HasIndex("SacramentalHymnHymnId");
+                    b.HasIndex("SacramentalHymnId");
 
                     b.ToTable("SacramentMeeting");
+                });
+
+            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
+                {
+                    b.Property<int>("SpeakerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpeakerId"), 1L, 1);
+
+                    b.Property<int>("SacramentMeetingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpeakerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Topic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SpeakerId");
+
+                    b.ToTable("Speaker");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.SacramentMeeting", b =>
                 {
                     b.HasOne("SacramentMeetingPlanner.Models.Hymn", "ClosingHymn")
                         .WithMany()
-                        .HasForeignKey("ClosingHymnHymnId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClosingHymnId");
 
                     b.HasOne("SacramentMeetingPlanner.Models.Hymn", "IntermediateHymn")
                         .WithMany()
-                        .HasForeignKey("IntermediateHymnHymnId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IntermediateHymnId");
 
                     b.HasOne("SacramentMeetingPlanner.Models.Hymn", "OpeningHymn")
                         .WithMany()
-                        .HasForeignKey("OpeningHymnHymnId")
+                        .HasForeignKey("OpeningHymnId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SacramentMeetingPlanner.Models.Hymn", "SacramentalHymn")
                         .WithMany()
-                        .HasForeignKey("SacramentalHymnHymnId")
+                        .HasForeignKey("SacramentalHymnId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SacramentMeetingPlanner.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,75 +24,91 @@ namespace SacramentMeetingPlanner.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Speaker",
+                columns: table => new
+                {
+                    SpeakerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SpeakerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SacramentMeetingId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Speaker", x => x.SpeakerId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SacramentMeeting",
                 columns: table => new
                 {
                     SacramentMeetingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Presiding = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Conducting = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OpeningHymnHymnId = table.Column<int>(type: "int", nullable: false),
+                    Presiding = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Conducting = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpeningHymnId = table.Column<int>(type: "int", nullable: false),
                     Invocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SacramentalHymnHymnId = table.Column<int>(type: "int", nullable: false),
-                    IntermediateHymnHymnId = table.Column<int>(type: "int", nullable: false),
-                    ClosingHymnHymnId = table.Column<int>(type: "int", nullable: false),
-                    Benediction = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SacramentalHymnId = table.Column<int>(type: "int", nullable: false),
+                    IntermediateHymnId = table.Column<int>(type: "int", nullable: true),
+                    ClosingHymnId = table.Column<int>(type: "int", nullable: true),
+                    Benediction = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SacramentMeeting", x => x.SacramentMeetingId);
                     table.ForeignKey(
-                        name: "FK_SacramentMeeting_Hymn_ClosingHymnHymnId",
-                        column: x => x.ClosingHymnHymnId,
+                        name: "FK_SacramentMeeting_Hymn_ClosingHymnId",
+                        column: x => x.ClosingHymnId,
                         principalTable: "Hymn",
-                        principalColumn: "HymnId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "HymnId");
                     table.ForeignKey(
-                        name: "FK_SacramentMeeting_Hymn_IntermediateHymnHymnId",
-                        column: x => x.IntermediateHymnHymnId,
+                        name: "FK_SacramentMeeting_Hymn_IntermediateHymnId",
+                        column: x => x.IntermediateHymnId,
+                        principalTable: "Hymn",
+                        principalColumn: "HymnId");
+                    table.ForeignKey(
+                        name: "FK_SacramentMeeting_Hymn_OpeningHymnId",
+                        column: x => x.OpeningHymnId,
                         principalTable: "Hymn",
                         principalColumn: "HymnId",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_SacramentMeeting_Hymn_OpeningHymnHymnId",
-                        column: x => x.OpeningHymnHymnId,
-                        principalTable: "Hymn",
-                        principalColumn: "HymnId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_SacramentMeeting_Hymn_SacramentalHymnHymnId",
-                        column: x => x.SacramentalHymnHymnId,
+                        name: "FK_SacramentMeeting_Hymn_SacramentalHymnId",
+                        column: x => x.SacramentalHymnId,
                         principalTable: "Hymn",
                         principalColumn: "HymnId",
                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SacramentMeeting_ClosingHymnHymnId",
+                name: "IX_SacramentMeeting_ClosingHymnId",
                 table: "SacramentMeeting",
-                column: "ClosingHymnHymnId");
+                column: "ClosingHymnId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SacramentMeeting_IntermediateHymnHymnId",
+                name: "IX_SacramentMeeting_IntermediateHymnId",
                 table: "SacramentMeeting",
-                column: "IntermediateHymnHymnId");
+                column: "IntermediateHymnId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SacramentMeeting_OpeningHymnHymnId",
+                name: "IX_SacramentMeeting_OpeningHymnId",
                 table: "SacramentMeeting",
-                column: "OpeningHymnHymnId");
+                column: "OpeningHymnId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SacramentMeeting_SacramentalHymnHymnId",
+                name: "IX_SacramentMeeting_SacramentalHymnId",
                 table: "SacramentMeeting",
-                column: "SacramentalHymnHymnId");
+                column: "SacramentalHymnId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "SacramentMeeting");
+
+            migrationBuilder.DropTable(
+                name: "Speaker");
 
             migrationBuilder.DropTable(
                 name: "Hymn");

@@ -9,25 +9,31 @@ namespace SacramentMeetingPlanner.Models
 
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        public string Presiding { get; set; }
+        public string ?Presiding { get; set; }
 
-        public string Conducting { get; set; }
+        public string ?Conducting { get; set; }
 
         [Display(Name = "Opening Hymn")]
-        public Hymn OpeningHymn { get; set; }
+        public int OpeningHymnId { get; set; }
 
         public string Invocation { get; set; }
 
         [Display(Name = "Sacramental Hymn")]
-        public Hymn SacramentalHymn { get; set; }
+        public int SacramentalHymnId { get; set; }
 
         [Display(Name = "Intermediate Hymn")]
-        public Hymn IntermediateHymn { get; set; }
+        public int ?IntermediateHymnId { get; set; }
 
         [Display(Name = "Closing Hymn")]
+        public int ?ClosingHymnId { get; set; }
+
+        public string ?Benediction { get; set; }
+
+        // Nav Properties
+        public Hymn OpeningHymn { get; set; }
+
+        public Hymn SacramentalHymn { get; set; }
+        public Hymn? IntermediateHymn { get; set; }
         public Hymn ClosingHymn { get; set; }
-
-        public string Benediction { get; set; } 
-
     }
 }

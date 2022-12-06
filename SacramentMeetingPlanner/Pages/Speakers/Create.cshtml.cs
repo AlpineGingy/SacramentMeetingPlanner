@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SacramentMeetingPlanner.Data;
 using SacramentMeetingPlanner.Models;
 
-namespace SacramentMeetingPlanner.Pages.SacramentMeetings
+namespace SacramentMeetingPlanner.Pages.Speakers
 {
     public class CreateModel : PageModel
     {
@@ -21,23 +21,22 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
 
         public IActionResult OnGet()
         {
-            ViewData["HymnId"] = new SelectList(_context.Set<Hymn>(), "HymnId", "HymnTitle");
             return Page();
         }
 
         [BindProperty]
-        public SacramentMeeting SacramentMeeting { get; set; }
+        public Speaker Speaker { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          //if (!ModelState.IsValid)
-          //  {
-          //      return Page();
-          //  }
+          if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            _context.SacramentMeeting.Add(SacramentMeeting);
+            _context.Speaker.Add(Speaker);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

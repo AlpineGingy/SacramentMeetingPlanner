@@ -29,9 +29,25 @@
                 <span asp-validation-for="SacramentMeeting.Conducting" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="SacramentMeeting.OpeningHymnId" class="control-label"></label>
+                <select asp-for="SacramentMeeting.OpeningHymnId" class="form-control" asp-items="ViewBag.HymnId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="SacramentMeeting.Invocation" class="control-label"></label>
                 <input asp-for="SacramentMeeting.Invocation" class="form-control" />
                 <span asp-validation-for="SacramentMeeting.Invocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.SacramentalHymnId" class="control-label"></label>
+                <select asp-for="SacramentMeeting.SacramentalHymnId" class="form-control" asp-items="ViewBag.HymnId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.IntermediateHymnId" class="control-label"></label>
+                <select asp-for="SacramentMeeting.IntermediateHymnId" class="form-control" asp-items="ViewBag.HymnId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SacramentMeeting.ClosingHymnId" class="control-label"></label>
+                <select asp-for="SacramentMeeting.ClosingHymnId" class="form-control" asp-items="ViewBag.HymnId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="SacramentMeeting.Benediction" class="control-label"></label>
