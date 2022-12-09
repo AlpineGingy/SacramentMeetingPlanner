@@ -50,7 +50,6 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             var speakers = from s in _context.Speaker
                           select s;
             speakers = speakers.Where(s => s.SacramentMeetingId == id);
-
             Speakers = speakers;
 
             return Page();

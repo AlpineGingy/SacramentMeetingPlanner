@@ -30,10 +30,14 @@ namespace SacramentMeetingPlanner.Models
         public string ?Benediction { get; set; }
 
         // Nav Properties
+        [Display(Name = "Opening Hymn")]
         public Hymn OpeningHymn { get; set; }
 
+        [Display(Name = "Sacramental Hymn")]
         public Hymn SacramentalHymn { get; set; }
+        [Display(Name = "Intermediate Hymn")]
         public Hymn? IntermediateHymn { get; set; }
+        [Display(Name = "Closing Hymn")]
         public Hymn ClosingHymn { get; set; }
 
         public Speaker Speaker { get; set; }

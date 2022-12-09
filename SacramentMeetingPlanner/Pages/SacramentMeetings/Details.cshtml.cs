@@ -19,7 +19,11 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             _context = context;
         }
 
-      public SacramentMeeting SacramentMeeting { get; set; }
+        public SacramentMeeting SacramentMeeting { get; set; }
+
+
+        [BindProperty]
+        public IQueryable<Speaker> Speakers { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +33,18 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             }
 
             var sacramentmeeting = await _context.SacramentMeeting
-                .Include(s => s.Speaker.SpeakerId == id)
+                .Include(h => h.OpeningHymn)
+                .Include(h => h.SacramentalHymn)
+                .Include(h => h.IntermediateHymn)
+                .Include(h => h.ClosingHymn)
                 .FirstOrDefaultAsync(m => m.SacramentMeetingId == id);
-            
+
+            var speakers = from s in _context.Speaker
+                           select s;
+            speakers = speakers.Where(s => s.SacramentMeetingId == id);
+            Speakers = speakers;
+
+
             if (sacramentmeeting == null)
             {
                 return NotFound();
