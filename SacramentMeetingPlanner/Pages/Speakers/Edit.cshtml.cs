@@ -23,6 +23,9 @@ namespace SacramentMeetingPlanner.Pages.Speakers
         [BindProperty]
         public Speaker Speaker { get; set; } = default!;
 
+        [BindProperty(SupportsGet = true)]
+        public string MeetingId { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Speaker == null)
@@ -52,6 +55,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
 
             try
             {
+                Speaker.SacramentMeetingId = int.Parse(MeetingId);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -66,7 +70,7 @@ namespace SacramentMeetingPlanner.Pages.Speakers
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { MeetingId = MeetingId });
         }
 
         private bool SpeakerExists(int id)

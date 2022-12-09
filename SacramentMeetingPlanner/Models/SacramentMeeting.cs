@@ -35,5 +35,7 @@ namespace SacramentMeetingPlanner.Models
         public Hymn SacramentalHymn { get; set; }
         public Hymn? IntermediateHymn { get; set; }
         public Hymn ClosingHymn { get; set; }
+
+        public Speaker Speaker { get; set; }
     }
 }

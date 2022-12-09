@@ -20,8 +20,18 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             _context = context;
         }
 
+        [BindProperty(SupportsGet = true)]
+        public string id { get; set; }
+
         [BindProperty]
         public SacramentMeeting SacramentMeeting { get; set; } = default!;
+
+        [BindProperty]
+        public Speaker Speaker { get; set; }
+
+        [BindProperty]
+        public IQueryable<Speaker> Speakers { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +46,13 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
                 return NotFound();
             }
             SacramentMeeting = sacramentmeeting;
+
+            var speakers = from s in _context.Speaker
+                          select s;
+            speakers = speakers.Where(s => s.SacramentMeetingId == id);
+
+            Speakers = speakers;
+
             return Page();
         }
 

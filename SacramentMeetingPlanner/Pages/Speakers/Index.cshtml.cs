@@ -19,13 +19,23 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             _context = context;
         }
 
+        [BindProperty(SupportsGet = true)]
+        public string MeetingId { get; set; }
+
         public IList<Speaker> Speaker { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
+            var speaker = from s in _context.Speaker
+                          select s;
+            if (!string.IsNullOrEmpty(MeetingId))
+            {
+                speaker = speaker.Where(s => s.SacramentMeetingId == (int.Parse(MeetingId)));
+            }
+
             if (_context.Speaker != null)
             {
-                Speaker = await _context.Speaker.ToListAsync();
+                Speaker = await speaker.ToListAsync();
             }
         }
     }

@@ -26,7 +26,10 @@ namespace SacramentMeetingPlanner.Pages.Speakers
 
         [BindProperty]
         public Speaker Speaker { get; set; }
-        
+
+        [BindProperty(SupportsGet = true)]
+        public string MeetingId { get; set; }
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -37,9 +40,10 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             }
 
             _context.Speaker.Add(Speaker);
+            Speaker.SacramentMeetingId = int.Parse(MeetingId);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { MeetingId = MeetingId});
         }
     }
 }

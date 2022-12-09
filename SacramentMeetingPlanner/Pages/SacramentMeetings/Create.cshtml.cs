@@ -19,6 +19,8 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             _context = context;
         }
 
+
+
         public IActionResult OnGet()
         {
             ViewData["HymnId"] = new SelectList(_context.Set<Hymn>(), "HymnId", "HymnTitle");
@@ -27,7 +29,7 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
 
         [BindProperty]
         public SacramentMeeting SacramentMeeting { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -40,7 +42,7 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             _context.SacramentMeeting.Add(SacramentMeeting);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Speakers/Index", new { MeetingId = SacramentMeeting.SacramentalHymnId });
         }
     }
 }

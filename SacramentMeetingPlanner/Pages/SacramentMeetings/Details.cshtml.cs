@@ -28,7 +28,10 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
                 return NotFound();
             }
 
-            var sacramentmeeting = await _context.SacramentMeeting.FirstOrDefaultAsync(m => m.SacramentMeetingId == id);
+            var sacramentmeeting = await _context.SacramentMeeting
+                .Include(s => s.Speaker.SpeakerId == id)
+                .FirstOrDefaultAsync(m => m.SacramentMeetingId == id);
+            
             if (sacramentmeeting == null)
             {
                 return NotFound();
