@@ -19,7 +19,10 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             _context = context;
         }
 
-      public Speaker Speaker { get; set; }
+        public Speaker Speaker { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string MeetingId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
