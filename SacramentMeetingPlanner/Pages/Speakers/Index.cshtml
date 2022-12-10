@@ -39,8 +39,8 @@
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.SpeakerId" asp-route-MeetingId="@Model.MeetingId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.SpeakerId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.SpeakerId">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.SpeakerId" asp-route-MeetingId="@Model.MeetingId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SpeakerId" asp-route-MeetingId="@Model.MeetingId">Delete</a>
             </td>
         </tr>
 }

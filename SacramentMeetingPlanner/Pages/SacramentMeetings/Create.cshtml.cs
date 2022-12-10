@@ -42,7 +42,7 @@ namespace SacramentMeetingPlanner.Pages.SacramentMeetings
             _context.SacramentMeeting.Add(SacramentMeeting);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Speakers/Index", new { MeetingId = SacramentMeeting.SacramentalHymnId });
+            return RedirectToPage("/Speakers/Index", new { MeetingId = SacramentMeeting.SacramentMeetingId });
         }
     }
 }
