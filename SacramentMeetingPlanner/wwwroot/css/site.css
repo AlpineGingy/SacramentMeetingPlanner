@@ -3,9 +3,9 @@ html {
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
@@ -15,4 +15,17 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: "Times New Roman";
+  background-color: tan;
 }
+footer {
+    color: white;
+    background-color: navy;
+}
+#copyright {
+    color: white;
+}
+
+/*main {
+    background-color: navy;
+}*/
