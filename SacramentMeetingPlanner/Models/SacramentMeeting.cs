@@ -9,13 +9,20 @@ namespace SacramentMeetingPlanner.Models
 
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        public string ?Presiding { get; set; }
 
-        public string ?Conducting { get; set; }
+        [StringLength(30, MinimumLength = 3)]
+        [Required]
+        public string Presiding { get; set; }
+
+        [StringLength(30, MinimumLength = 3)]
+        [Required]
+        public string Conducting { get; set; }
 
         [Display(Name = "Opening Hymn")]
         public int OpeningHymnId { get; set; }
 
+        [StringLength(30, MinimumLength = 3)]
+        [Required]
         public string Invocation { get; set; }
 
         [Display(Name = "Sacramental Hymn")]
@@ -27,6 +34,8 @@ namespace SacramentMeetingPlanner.Models
         [Display(Name = "Closing Hymn")]
         public int ?ClosingHymnId { get; set; }
 
+        [StringLength(30, MinimumLength = 3)]
+        [Required]
         public string ?Benediction { get; set; }
 
         // Nav Properties
