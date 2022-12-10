@@ -16,9 +16,8 @@ html {
 body {
   margin-bottom: 60px;
   font-family: "Times New Roman";
-  background-color: tan;
 }
-footer {
+footer header {
     color: white;
     background-color: navy;
 }
